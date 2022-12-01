@@ -19,12 +19,13 @@ pub fn main() {
             }
         }
     }
+    heap.push(sum);
 
 
     let mut total = 0;
-    total += heap.pop().unwrap_or_default();
+    total += heap.pop().unwrap();
     println!("The total for the #1 is: {}", total);
-    total += heap.pop().unwrap_or_default();
-    total += heap.pop().unwrap_or_default();
+    total += heap.pop().unwrap();
+    total += heap.pop().unwrap();
     println!("the total for the top3 is: {}", total)
 }
