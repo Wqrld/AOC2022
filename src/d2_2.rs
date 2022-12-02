@@ -19,28 +19,30 @@ const DRAWSCORE: i32 = 3;
 const LOSSSCORE: i32 = 0;
 
 fn beats(what: &str) -> &str{
-    if what == SCISSORS {return ROCK}
-    if what == PAPER {return SCISSORS}
-    if what == ROCK {return PAPER}
-    else {
-        return ROCK; // TODO cleanup
-    }
+    return match what {
+        SCISSORS => ROCK,
+        PAPER => SCISSORS,
+        ROCK => PAPER,
+        _ => panic!("Invalid type")
+    };
 }
 
 fn loses(what: &str) -> &str{
-    if what == SCISSORS {return PAPER}
-    if what == PAPER {return ROCK}
-    if what == ROCK {return SCISSORS}
-    else {
-        return ROCK; // TODO cleanup
-    }
+    return match what {
+        SCISSORS => PAPER,
+        PAPER => ROCK,
+        ROCK => SCISSORS,
+        _ => panic!("Invalid type")
+    };
 }
 
 fn movescore(what: &str) -> i32 {
-    if what == SCISSORS {return SCISSORVAL}
-    if what == PAPER {return PAPERVAL}
-    if what == ROCK {return ROCKVAL}
-    else { return 0 };
+    return match what {
+        SCISSORS => SCISSORVAL,
+        PAPER => PAPERVAL,
+        ROCK => ROCKVAL,
+        _ => panic!("Invalid type")
+    };
 }
 
 pub fn main(){
@@ -53,19 +55,14 @@ pub fn main(){
             let they: &str = splitted.next().unwrap();
             let outcome: &str = splitted.next().unwrap();
 
-            // Paper beats Rock beats scissors beats paper
-
-            if outcome == WIN {
-                total += movescore(beats(they)) + WINSCORE;
-                println!("WIN | They was {}, doing {}, total: {}", they, beats(they), total)
-            }else if outcome == DRAW {
-                total += movescore(they) + DRAWSCORE;
-                println!("DRAW | They was {}, doing {}, total: {}", they, beats(they), total)
-            }else if outcome == LOSS{
-                total += movescore(loses(they)) + LOSSSCORE;
-                println!("LOSS | They was {}, doing {}, total: {}", they, beats(they), total)
+            match outcome {
+                WIN => { total += movescore(beats(they)) + WINSCORE; }
+                DRAW => { total += movescore(they) + DRAWSCORE; }
+                LOSS => { total += movescore(loses(they)) + LOSSSCORE; }
+                _ => panic!("invalid outcome")
             }
+
         }
 
-    println!("Total: {}", total)
+        println!("Total: {}", total)
 }
