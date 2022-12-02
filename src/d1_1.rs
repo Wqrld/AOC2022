@@ -1,4 +1,4 @@
-use std::collections::BinaryHeap;
+use std::collections::binary_heap::BinaryHeap;
 use std::fs;
 
 // Day 1 - Elve calories
