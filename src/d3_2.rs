@@ -16,23 +16,27 @@ pub fn main(){
     let mut a = "";
     let mut b ="";
     let mut c="";
+
     let mut i = 0;
     let mut total = 0;
-    for line in lines {
-        if i == 0 {a = line}
-        else if i == 1 {b = line}
-        else if i == 2 {
-            c = line;
-            for char in a.chars() {
-                if b.contains(char) && c.contains(char) {
-                    total += getCharVal(char);
-                    println!("Found char {} in line {}, val: {}", char, line, getCharVal(char));
-                    break;
-                }
-            }
-            i = -1;
-        }
 
+    for line in lines {
+        match i {
+            0 => a = line,
+            1 => b = line,
+            2 => {
+                c = line;
+                for char in a.chars() {
+                    if b.contains(char) && c.contains(char) {
+                        total += getCharVal(char);
+                        println!("Found char {} in line {}, val: {}", char, line, getCharVal(char));
+                        break;
+                    }
+                }
+                i = -1;
+            },
+            _ => panic!("Invalid value for i")
+        }
         i += 1;
 
 
